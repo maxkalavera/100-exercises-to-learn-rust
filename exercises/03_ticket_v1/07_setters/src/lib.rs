@@ -9,23 +9,46 @@ pub struct Ticket {
     status: String,
 }
 
+// Enforcers
+
 impl Ticket {
-    pub fn new(title: String, description: String, status: String) -> Ticket {
+    fn enforce_title (title: String) -> String {
         if title.is_empty() {
             panic!("Title cannot be empty");
         }
         if title.len() > 50 {
             panic!("Title cannot be longer than 50 bytes");
         }
+
+        return title
+    }
+
+    pub fn enforce_description (description: String) -> String {
         if description.is_empty() {
             panic!("Description cannot be empty");
         }
         if description.len() > 500 {
             panic!("Description cannot be longer than 500 bytes");
         }
+
+        return description
+    }
+
+    pub fn enforce_status (status: String) -> String {
         if status != "To-Do" && status != "In Progress" && status != "Done" {
             panic!("Only `To-Do`, `In Progress`, and `Done` statuses are allowed");
         }
+
+        return status
+    }    
+}
+
+impl Ticket {
+
+    pub fn new(title: String, description: String, status: String) -> Ticket {
+        let title = Ticket::enforce_title(title);
+        let description = Ticket::enforce_description(description);
+        let status = Ticket::enforce_status(status);
 
         Ticket {
             title,
@@ -44,6 +67,21 @@ impl Ticket {
 
     pub fn status(&self) -> &String {
         &self.status
+    }
+
+    pub fn set_title (&mut self, title: String) {
+        let title = Ticket::enforce_title(title);
+        self.title = title;
+    }
+
+    pub fn set_description (&mut self, description: String) {
+        let description = Ticket::enforce_description(description);
+        self.description = description;
+    }
+
+    pub fn set_status (&mut self, status: String) {
+        let status = Ticket::enforce_status(status);
+        self.status = status;
     }
 }
 

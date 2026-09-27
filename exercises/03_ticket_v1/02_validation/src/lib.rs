@@ -18,7 +18,56 @@ impl Ticket {
     // as well as some `String` methods. Use the documentation of Rust's standard library
     // to find the most appropriate options -> https://doc.rust-lang.org/std/string/struct.String.html
     fn new(title: String, description: String, status: String) -> Self {
-        todo!();
+
+        // let status = match status.as_str() {
+        //     "To-Do" | "In Progress" | "Done" => status,
+        //     _ => panic!("Only `To-Do`, `In Progress`, and `Done` statuses are allowed") 
+        // };
+        // let title = match title.as_str() {
+        //     "" => panic!("Title cannot be empty"),
+        //     _ => title
+        // };
+        // let description = match description.as_str() {
+        //     "" => panic!("Description cannot be empty"),
+        //     _ => description
+        // };
+
+        // if title.as_bytes().len() > 50 {
+        //     panic!("Title cannot be longer than 50 bytes");
+        // } else if description.as_bytes().len() > 500 {
+        //     panic!("Description cannot be longer than 500 bytes");
+        // }
+
+
+        // if ! [ "To-Do", "In Progress", "Done" ].contains(&status.as_str()) {
+        //     panic!("Only `To-Do`, `In Progress`, and `Done` statuses are allowed");
+        // } else 
+        // if title.is_empty() {
+        //     panic!("Title cannot be empty");
+        // } else if description.is_empty() {
+        //     panic!("Description cannot be empty");
+        // } else if title.as_bytes().len() > 50 {
+        //     panic!("Title cannot be longer than 50 bytes");
+        // } else if description.as_bytes().len() > 500 {
+        //     panic!("Description cannot be longer than 500 bytes");
+        // }
+
+        if ! matches!(
+            status.as_str(), 
+            "To-Do" | "In Progress" | "Done"
+        ) {
+            panic!("Only `To-Do`, `In Progress`, and `Done` statuses are allowed");
+        } else 
+        if title.is_empty() {
+            panic!("Title cannot be empty");
+        } else if description.is_empty() {
+            panic!("Description cannot be empty");
+        } else if title.as_bytes().len() > 50 {
+            panic!("Title cannot be longer than 50 bytes");
+        } else if description.as_bytes().len() > 500 {
+            panic!("Description cannot be longer than 500 bytes");
+        }
+
         Self {
             title,
             description,
