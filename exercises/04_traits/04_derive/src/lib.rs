@@ -9,7 +9,8 @@
 // If the compared type doesn't implement `Debug`, it doesn't know how to represent them!
 
 #[derive(PartialEq)]
-struct Ticket {
+#[derive(Debug)]
+pub struct Ticket {
     title: String,
     description: String,
     status: String,
