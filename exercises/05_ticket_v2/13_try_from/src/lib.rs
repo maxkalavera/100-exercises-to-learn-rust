@@ -8,6 +8,39 @@ enum Status {
     Done,
 }
 
+impl Status {
+
+    fn match_from_str (target: &str) -> Result<Self, StatusError> {
+        match target {
+            str if str.to_lowercase() == "todo" => Ok(Status::ToDo),
+            str if str.to_lowercase() == "inprogress" => Ok(Status::InProgress),
+            str if str.to_lowercase() == "done" => Ok(Status::Done),
+            _ => Err(StatusError::ParseErr)
+        }
+    }
+}
+
+#[derive(Debug)]
+enum StatusError {
+    ParseErr
+}
+
+impl TryFrom<String> for Status {
+    type Error = StatusError;
+
+    fn try_from(target: String) -> Result<Self, Self::Error> { 
+        Status::match_from_str(target.as_str())
+    }
+}
+
+impl TryFrom<&str> for Status {
+    type Error = StatusError;
+
+    fn try_from(target: &str) -> Result<Self, Self::Error> { 
+        Status::match_from_str(target)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

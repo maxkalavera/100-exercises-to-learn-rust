@@ -16,7 +16,7 @@ fn easy_ticket(title: String, description: String, status: Status) -> Ticket {
         title.clone(), 
         description.clone(), 
         status.clone()
-    );
+    );    
     let ticket = match ticket {
         Result::Ok(ticket) => Ok(ticket),
         Result::Err(TicketNewError::TitleErr(err_msg)) => panic!("{}", err_msg),
